@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-
+     # Install backend dependencies
       - name: Install dependencies
         run: npm install
         working-directory: server
@@ -25,9 +25,23 @@ jobs:
       - name: Build project
         run: npm run build
         working-directory: server
+    # Install frontend dependencides
+      - name: Install client dependencied
+        run: npm install
+        working-directory: frontend
+
+      - name: Build client project
+        run: npm run build
+        working-drectory: frontend
+    #Coupy react build into server
+      - name: Copy React build to server
+        run: |
+          mkdir -p server/public
+          cp -r client/dist/* server/public
 
       - name: Deploy to Azure
         uses: azure/webapps-deploy@v2
         with:
           app-name: react-node-app
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ./server
