@@ -37,7 +37,7 @@ jobs:
       - name: Copy React build to server
         run: |
           mkdir -p server/public
-          cp -r client/dist/* server/public
+          cp -r frontend/dist/* server/public
 
       - name: Deploy to Azure
         uses: azure/webapps-deploy@v2
