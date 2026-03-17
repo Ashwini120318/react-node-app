@@ -10,8 +10,6 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 
-const __dirname = path.resolve();
-
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('*', (req, res) => {
